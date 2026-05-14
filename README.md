@@ -21,9 +21,13 @@ mvn spring-boot:run
 
 ## Access Points
 Component	URL
+
 Frontend UI	http://localhost:8080
+
 API Base	http://localhost:8080/api/tasks
+
 H2 Database Console	http://localhost:8080/h2-console
+
 H2 Console Login:
 
 JDBC URL: jdbc:h2:file:./data/taskdb
@@ -34,10 +38,15 @@ Password: (leave empty)
 
 ## API Endpoints
 Method	Endpoint	Description
+
 POST	/api/tasks	Create a new task
+
 GET	/api/tasks	Get all tasks
+
 GET	/api/tasks/{id}	Get task by ID
+
 PATCH	/api/tasks/{id}	Update specific fields
+
 DELETE	/api/tasks/{id}	Delete a task
 
 ## Example Requests
@@ -69,21 +78,28 @@ curl -X DELETE http://localhost:8080/api/tasks/1
 ```
 ## Database Schema
 Task Table
+
 Column	Type	Constraints	Description
+
 id	BIGINT	PRIMARY KEY, AUTO_INCREMENT	Unique identifier
+
 title	VARCHAR(200)	NOT NULL	Task title
+
 description	VARCHAR(2000)		Detailed description
+
 status	VARCHAR(50)	NOT NULL	PENDING, IN_PROGRESS, COMPLETED
+
 due_date_time	TIMESTAMP	NOT NULL	Deadline for task
+
 created_at	TIMESTAMP	NOT NULL, AUTO	Creation timestamp
 
-Testing
+## Testing
 Run all tests:
 
 ``` bash
 mvn test
 ```
-Test coverage includes:
+### Test coverage includes:
 
 Service layer unit tests (Mockito)
 
@@ -123,21 +139,5 @@ dueDateTime	Required, cannot be in the past
 status	Must be PENDING, IN_PROGRESS, or COMPLETED
 description	Optional, max 2000 characters
 
-## Troubleshooting
-H2 Console shows 404:
 
-Verify spring.h2.console.enabled=true in properties
 
-Access exact URL: /h2-console (not /h2)
-
-Database connection fails:
-
-Use JDBC URL: jdbc:h2:file:./data/taskdb
-
-Delete ./data folder and restart app
-
-Port 8080 already in use:
-
-properties
-# Change in application.properties
-server.port=8081
